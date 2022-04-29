@@ -7,29 +7,34 @@
 class Blog {
     constructor() {
         this.article = '';
-        this.viewers = [];
+        this.subscribers = [];
     }
 
     setArticle(article) {
         this.article = article;
-        this.notifyViewers();
+        this.notifySubscribers();
     }
 
-    notifyViewers() {
-        this.viewers.forEach((viewer) => viewer.inform(this.article));
+    notifySubscribers() {
+        this.subscribers.forEach((subscriber) => subscriber.inform(this.article));
     }
 
     subscribe(observer) {
-        this.viewers.push(observer);
+        this.subscribers.push(observer);
     }
 
     unsubscribe(observer) {
-        this.viewers = this.viewers.filter((viewer) => viewer.email !== observer.email);
+        this.subscribers = this.subscribers.filter((subscriber) => subscriber.email !== observer.email);
     }
 }
 
-class User {
+class Subscriber {
+    inform(article) {}
+}
+
+class User extends Subscriber {
     constructor(name, email) {
+        super()
         this.name = name;
         this.email = email;
     }
